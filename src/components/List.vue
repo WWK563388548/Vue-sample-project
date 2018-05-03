@@ -2,11 +2,13 @@
 <template>
     <div class="view">
         <h1 class="title">{{title}}</h1>
-
+        <!-- 按下回车键时@keyup.enter生效，并执行方法addNewData -->
+        <!-- 使用v-model来进行双向绑定 -->
+        <input v-model="newData" @keyup.enter="addNewData" />
         <ul>
             <!-- 使用v-for循环渲染事项 -->
             <!-- 使用v-bind判断是否完成事项 -->
-             <!-- 使用@click来绑定click事件（或其他事件） -->
+            <!-- 使用@click来绑定click事件（或其他事件） -->
             <li v-for="item in items" v-bind:class="{finish: item.isFinished}" @click="toggleFinish(item)">
                 {{item.text}}
             </li>
@@ -33,12 +35,25 @@
                        isFinished: true
                     },
                 ],
+                newData: '',
             }
         },
         methods: {
             toggleFinish: function(item){
                 // 改变isFinished状态
                 item.isFinished = !item.isFinished;
+            },
+            addNewData: function(){
+                // console.log(this.newData);
+                this.items.push(
+                    {
+                       text: this.newData,
+                       isFinished: false
+                    },
+                );
+
+                // 当输入框为空时,点回车直接清空输入框内容
+                this.newData = '';
             }
         }
     }
