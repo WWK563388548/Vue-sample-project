@@ -6,7 +6,8 @@
         <ul>
             <!-- 使用v-for循环渲染事项 -->
             <!-- 使用v-bind判断是否完成事项 -->
-            <li v-for="item in items" v-bind:class="{finish: item.isFinished}">
+             <!-- 使用@click来绑定click事件（或其他事件） -->
+            <li v-for="item in items" v-bind:class="{finish: item.isFinished}" @click="toggleFinish(item)">
                 {{item.text}}
             </li>
         </ul>
@@ -32,6 +33,12 @@
                        isFinished: true
                     },
                 ],
+            }
+        },
+        methods: {
+            toggleFinish: function(item){
+                // 改变isFinished状态
+                item.isFinished = !item.isFinished;
             }
         }
     }
