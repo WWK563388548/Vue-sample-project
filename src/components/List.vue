@@ -25,16 +25,7 @@
         data(){
             return {
                 title: "我的待办事项",
-                items: [
-                    {
-                       text: "使用Vue开发项目",
-                       isFinished: false
-                    },
-                    {
-                       text: "阅读Vue文档",
-                       isFinished: true
-                    },
-                ],
+                items: [],
                 newData: '',
             }
         },
@@ -51,6 +42,10 @@
                        isFinished: false
                     },
                 );
+                // 将输入框中的输入传递给父组件App.vue
+                // 自定义事件(myInput为事件名, this.newData为想要传送的参数，即input输入的内容)
+                // 触发myInput事件，并且传递参数
+                this.$emit('myInput', this.newData);
 
                 // 当输入框为空时,点回车直接清空输入框内容
                 this.newData = '';
